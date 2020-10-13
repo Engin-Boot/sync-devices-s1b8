@@ -74,23 +74,35 @@ void printPatientInformation() {
 	cout << "Busy state: " << originalPatientDetails.getBusyStatus() << endl;
 }
 
-void addNewPatient() {
-	string strInput, verified;
-	int intInput;
+bool checkPatientBusyness() {
+	if (!isPatientFree()) {
+		cout << "Some procedure is in progress with the current patient. Please try again in sometime..." << endl;
+		return false;
+	}
+	return true;
+}
+
+bool userConfirmationPage() {
+	string strInput;
 	if (isPatientDataAvailable()) {
 		cout << "Bullshit buffalo! you already have patient data... do you want to remove that information and add new patient (yes/no)? " << endl;
 		cin >> strInput;
 		if (strInput == "no") {
-			return;
+			return false;
 		}
-		
-		// check whether the patient is free or not.. if not free.. then ask him to try again later.. 
-		if (!isPatientFree()) {
-			cout << "Some procedure is in progress with the current patient. Please try again in sometime..." << endl;
-			return;
-		}
+		return checkPatientBusyness();
 	}
-	
+	return true;
+}
+
+void addNewPatient() {
+	string strInput, verified;
+	int intInput;
+
+	if (!userConfirmationPage()) {
+		return;
+	}
+
 	publishAndSetPatientBusyStatus(true);
 
 	do {
@@ -117,6 +129,47 @@ void addNewPatient() {
 	publishAndSetPatientBusyStatus(false);
 }
 
+void checkAndPromptforName(char choice) {
+	if (choice != 'n') {
+		return;
+	}
+	string strInput;
+	cout << "Enter new Name: ";
+	cin >> strInput;
+	publishAndSetPatientName(strInput);
+}
+
+void checkAndPromptforAge(char choice) {
+	if (choice != 'a') {
+		return;
+	}
+	int intInput;
+	cout << "Enter new age: ";
+	cin >> intInput;
+	publishAndSetPatientAge(intInput);
+}
+
+void checkAndPromptforGender(char choice) {
+	if (choice != 'g') {
+		return;
+	}
+	string strInput;
+	cout << "Enter new gender: ";
+	cin >> strInput;
+	publishAndSetPatientGender(strInput);
+}
+
+void checkAndPromptforProcedureName(char choice) {
+	if (choice != 'p') {
+		return;
+	}
+	string strInput;
+	cout << "Enter new procedure name: ";
+	cin >> strInput;
+	publishAndSetProcedureName(strInput);
+}
+
+
 void editPatientInfo() {
 	// show entered data first...
 	// give option to select what he wants to edit...
@@ -135,41 +188,18 @@ void editPatientInfo() {
 	}
 
 	publishAndSetPatientBusyStatus(true);
-	
+
 	cout << "The following are the entered patient information: " << endl;
 	printPatientInformation();
 
 	cout << "What do you want to edit (n for name/ a for age/ g for gender/ p for procedurename/ q to quit edit mode)? ";
 	cin >> choice;
-	switch (choice)
-	{
-	case 'n':
-		cout << "Enter new Name: ";
-		cin >> strInput;
-		publishAndSetPatientName(strInput);
-		break;
-	case 'a':
-		cout << "Enter new age: ";
-		cin >> intInput;
-		publishAndSetPatientAge(intInput);
-		break;
-	case 'g':
-		cout << "Enter new gender: ";
-		cin >> strInput;
-		publishAndSetPatientGender(strInput);
-		break;
-	case 'p':
-		cout << "Enter new procedure name: ";
-		cin >> strInput;
-		publishAndSetProcedureName(strInput);
-		break;
-	case 'q':
-		break;
-	default:
-		cout << "Invalid option selected.." << endl;
-		break;
-	}
-	
+
+	checkAndPromptforName(choice);
+	checkAndPromptforAge(choice);
+	checkAndPromptforGender(choice);
+	checkAndPromptforProcedureName(choice);
+
 	publishAndSetPatientBusyStatus(false);
 }
 
@@ -189,6 +219,6 @@ void setPatientDetails(string details) {
 	originalPatientDetails.setReportIds(params[5]);
 	bool val = params[6] == "1";
 	originalPatientDetails.setBusyStatus(val);
-	
+
 	temporaryPatientDetails = originalPatientDetails;
 }

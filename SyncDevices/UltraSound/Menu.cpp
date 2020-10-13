@@ -7,6 +7,37 @@ extern void editPatientInfo();
 extern void startProcedure();
 extern void printPatientInformation();
 
+void checkAndExecuteAddPatient(int choice) {
+	if (choice == 1) {
+		addNewPatient();
+	}
+}
+
+void checkAndExecuteEditPatient(int choice) {
+	if (choice == 2) {
+		editPatientInfo();
+	}
+}
+
+void checkAndExecuteStartProcedure(int choice) {
+	if (choice == 3) {
+		startProcedure();
+	}
+}
+
+void checkAndExecuteDisplayPatientData(int choice) {
+	if (choice == 4) {
+		printPatientInformation();
+	}
+}
+
+void executeChoice(int choice) {
+	checkAndExecuteAddPatient(choice);
+	checkAndExecuteEditPatient(choice);
+	checkAndExecuteStartProcedure(choice);
+	checkAndExecuteDisplayPatientData(choice);
+}
+
 void menuPage() {
 	int choice;
 	cout << "Select one of the following menu items!" << endl;
@@ -16,20 +47,8 @@ void menuPage() {
 	cout << "4. Print Patient Data" << endl;
 	cout << "Your choice (1/2/3/4)? ";
 	cin >> choice;
-	switch (choice) {
-	case 1:
-		addNewPatient();
-		break;
-	case 2:
-		editPatientInfo();
-		break;
-	case 3:
-		startProcedure();
-		break;
-	case 4:
-		printPatientInformation();
-		break;
-	}
+
+	executeChoice(choice);
 }
 
 void mainMenu() {
@@ -44,7 +63,6 @@ void mainMenu() {
 			menuPage();
 		}
 	} while (choice != 'q');
-	
-	// write code to clear sessions, expty required things.. and have a graceful exit..
 
+	// write code to clear sessions, expty required things.. and have a graceful exit..
 }

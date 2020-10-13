@@ -21,7 +21,7 @@ MQTTAsync client;
 struct pubsub_opts opts =
 {
 	1, 0, 0, MQTTASYNC_TRACE_MAXIMUM, "\n", 100,  	/* debug/app options */
-	MQTTVERSION_DEFAULT, NULL, "MRI_v1_pub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
+	MQTTVERSION_DEFAULT, NULL, "ECG_v1_pub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
 };
 
 int messageArrived(void* context, char* topicName, int topicLen, MQTTAsync_message* m)
@@ -98,31 +98,22 @@ void myconnect(MQTTAsync client)
 void connectPublisher() {
 	MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;
 	MQTTAsync_createOptions create_opts = MQTTAsync_createOptions_initializer;
-	char* buffer = NULL;
-	int url_allocated = 1;
 	int rc = 0;
 	const char* url = "localhost:1883";
-	const char* version = NULL;
-	const char* program_name = "MRI_v1_pub";
-
-	if (opts.verbose)
-		printf("URL is %s\n", url);
-
+	
 	create_opts.sendWhileDisconnected = 1;
 
 	rc = MQTTAsync_createWithOptions(&client, url, opts.clientid, MQTTCLIENT_PERSISTENCE_NONE, NULL, &create_opts);
 	if (rc != MQTTASYNC_SUCCESS)
 	{
-		if (!opts.quiet)
-			fprintf(stderr, "Failed to create client, return code: %s\n", MQTTAsync_strerror(rc));
+		fprintf(stderr, "Failed to create client, return code: %s\n", MQTTAsync_strerror(rc));
 		exit(EXIT_FAILURE);
 	}
 
 	rc = MQTTAsync_setCallbacks(client, client, NULL, messageArrived, NULL);
 	if (rc != MQTTASYNC_SUCCESS)
 	{
-		if (!opts.quiet)
-			fprintf(stderr, "Failed to set callbacks, return code: %s\n", MQTTAsync_strerror(rc));
+		fprintf(stderr, "Failed to set callbacks, return code: %s\n", MQTTAsync_strerror(rc));
 		exit(EXIT_FAILURE);
 	}
 
@@ -135,12 +126,9 @@ void connectPublisher() {
 int publish(string topicName, string message) {
 	int rc;
 	int datalen = (int)message.length();
-	if (opts.verbose)
-		printf("Publishing data of length %d\n", datalen);
 
 	rc = MQTTAsync_send(client, topicName.c_str(), datalen, message.c_str(), opts.qos, opts.retained, &pub_opts);
-	if (opts.verbose && rc != MQTTASYNC_SUCCESS && !opts.quiet)
+	if (rc != MQTTASYNC_SUCCESS)
 		fprintf(stderr, "Error from MQTTAsync_send: %s\n", MQTTAsync_strerror(rc));
-
 	return rc;
 }
