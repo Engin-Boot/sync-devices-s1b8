@@ -174,8 +174,6 @@ void editPatientInfo() {
 	// show entered data first...
 	// give option to select what he wants to edit...
 	char choice;
-	string strInput;
-	int intInput;
 
 	if (!isPatientDataAvailable()) {
 		cout << "Sorry.. no patient data is available. Kindly add patient info before editing..." << endl;

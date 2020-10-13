@@ -15,8 +15,8 @@ private:
     bool busy;
 
 public:
-    Patient(){}
-    Patient(string Name, string Gender, int Age, string ProcedureName) : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), busy(false) {}
+    Patient() {}
+    Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), busy(false) {}
 
     Patient& operator=(const Patient& p) {
         this->name = p.name;
@@ -57,11 +57,11 @@ public:
         return busy;
     }
 
-    void setName(string newName) {
+    void setName(const string& newName) {
         name = newName;
     }
 
-    void setGender(string newGender) {
+    void setGender(const string& newGender) {
         gender = newGender;
     }
 
@@ -69,15 +69,15 @@ public:
         age = newAge;
     }
 
-    void setProcedureName(string newProcedureName) {
+    void setProcedureName(const string& newProcedureName) {
         procedureName = newProcedureName;
     }
 
-    void setConsumables(string newConsumables) {
+    void setConsumables(const string& newConsumables) {
         consumables = newConsumables;
     }
 
-    void setReportIds(string newReportIds) {
+    void setReportIds(const string& newReportIds) {
         reportIds = newReportIds;
     }
 
@@ -85,7 +85,7 @@ public:
         busy = newStatus;
     }
 
-    void addConsumable(string newConsumable) {
+    void addConsumable(const string& newConsumable) {
         if (consumables.empty()) {
             consumables = newConsumable;
         }
@@ -94,7 +94,7 @@ public:
         }
     }
 
-    void addReportId(string newReportId) {
+    void addReportId(const string& newReportId) {
         if (reportIds.empty()) {
             reportIds = newReportId;
         }

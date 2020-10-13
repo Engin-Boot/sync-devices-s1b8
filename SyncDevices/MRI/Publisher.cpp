@@ -21,7 +21,7 @@ MQTTAsync client;
 struct pubsub_opts opts =
 {
 	1, 0, 0, MQTTASYNC_TRACE_MAXIMUM, "\n", 100,  	/* debug/app options */
-	MQTTVERSION_DEFAULT, NULL, "MRI_v1_pub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
+	MQTTVERSION_DEFAULT, NULL, "ECG_v1_pub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
 };
 
 int messageArrived(void* context, char* topicName, int topicLen, MQTTAsync_message* m)
@@ -38,18 +38,12 @@ void onConnectFailure(void* context, MQTTAsync_failureData* response)
 {
 	fprintf(stderr, "Connect failed, rc %s\n", response ? MQTTAsync_strerror(response->code) : "none");
 	connected = -1;
-
-	MQTTAsync client = (MQTTAsync)context;
 }
 
 void myconnect(MQTTAsync client);
-int mypublish(MQTTAsync client, int datalen, const char* data);
 
 void onConnect(void* context, MQTTAsync_successData* response)
 {
-	MQTTAsync client = (MQTTAsync)context;
-	int rc = 0;
-
 	if (opts.verbose)
 		printf("Connected\n");
 	connected = 1;
@@ -96,7 +90,6 @@ void myconnect(MQTTAsync client)
 
 
 void connectPublisher() {
-	MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;
 	MQTTAsync_createOptions create_opts = MQTTAsync_createOptions_initializer;
 	int rc = 0;
 	const char* url = "localhost:1883";

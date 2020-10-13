@@ -36,8 +36,6 @@ void procedure() {
 }
 
 void startProcedure() {
-	int count = 0;
-	string strInput;
 	if (!isPatientDataAvailable()) {
 		cout << "No patient details entered.. Please try after entering the patient details! " << endl;
 		return;

@@ -112,9 +112,7 @@ void connectToBroker_sub(MQTTAsync* client) {
 
 int subscribe() {
 	MQTTAsync client;
-	MQTTAsync_disconnectOptions disc_opts = MQTTAsync_disconnectOptions_initializer;
 	MQTTAsync_createOptions create_opts = MQTTAsync_createOptions_initializer;
-	int rc = 0;
 	const char* url = "localhost:1883";
 
 	createClient_sub(&client, url, &create_opts);
