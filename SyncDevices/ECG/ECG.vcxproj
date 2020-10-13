@@ -120,6 +120,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>paho-mqtt3as.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,6 +142,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ECG.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PatientWrapper.cpp" />
+    <ClCompile Include="Procedure.cpp" />
+    <ClCompile Include="Publisher.cpp" />
+    <ClCompile Include="Subscription.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\MQTTAsync.h" />
+    <ClInclude Include="inc\MQTTClientPersistence.h" />
+    <ClInclude Include="inc\MQTTExportDeclarations.h" />
+    <ClInclude Include="inc\MQTTProperties.h" />
+    <ClInclude Include="inc\MQTTReasonCodes.h" />
+    <ClInclude Include="inc\MQTTSubscribeOpts.h" />
+    <ClInclude Include="inc\Patient.h" />
+    <ClInclude Include="inc\pubsub_opts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
