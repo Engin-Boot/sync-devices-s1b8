@@ -10,7 +10,7 @@ int main()
 {
 	int result = 0;
 
-	result = subscribe();
+	 result = subscribe();
 	if (result != 0) {
 		cout << "Subscription failed!" << endl;
 		return result;
