@@ -1,42 +1,42 @@
 #include "PatientWrapper.h"
 
-void publishPatientDetails() {
-	publish("Patient/Details", temporaryPatientDetails.toString());
+void publishPatientDetails(string topicName) {
+	publish(topicName, temporaryPatientDetails.toString());
 }
 
 void publishAndSetPatientName(string newName) {
 	temporaryPatientDetails.setName(newName);
-	publishPatientDetails();
+	publishPatientDetails("Patient/Details");
 }
 
 void publishAndSetPatientGender(string newGender) {
 	temporaryPatientDetails.setGender(newGender);
-	publishPatientDetails();
+	publishPatientDetails("Patient/Details");
 }
 
 void publishAndSetPatientAge(int newAge) {
 	temporaryPatientDetails.setAge(newAge);
-	publishPatientDetails();
+	publishPatientDetails("Patient/Details");
 }
 
 void publishAndSetProcedureName(string newProcedureName) {
 	temporaryPatientDetails.setProcedureName(newProcedureName);
-	publishPatientDetails();
+	publishPatientDetails("Patient/Details");
 }
 
 void publishAndSetPatientBusyStatus(bool newStatus) {
 	temporaryPatientDetails.setBusyStatus(newStatus);
-	publishPatientDetails();
+	publishPatientDetails("Patient/Details");
 }
 
 void addConsumable(string newConsumable) {
 	temporaryPatientDetails.addConsumable(newConsumable);
-	publishPatientDetails();
+	publishPatientDetails("Patient/Details");
 }
 
 void addReportId(string newReportId) {
 	temporaryPatientDetails.addReportId(newReportId);
-	publishPatientDetails();
+	publishPatientDetails("Patient/Details");
 }
 
 bool isPatientDataAvailable() {
@@ -97,23 +97,25 @@ void addNewPatient() {
 	do {
 		cout << "Enter patient name: ";
 		cin >> strInput;
-		publishAndSetPatientName(strInput);
+		temporaryPatientDetails.setName(strInput);
 
 		cout << "Enter patient gender (Male/Female): ";
 		cin >> strInput;
-		publishAndSetPatientGender(strInput);
+		temporaryPatientDetails.setGender(strInput);
 
 		cout << "Enter patient age: ";
 		cin >> intInput;
-		publishAndSetPatientAge(intInput);
+		temporaryPatientDetails.setAge(intInput);
 
 		cout << "Enter Procedure name: ";
 		cin >> strInput;
-		publishAndSetProcedureName(strInput);
+		temporaryPatientDetails.setProcedureName(strInput);
 
 		cout << "Verified your details (yes/no)? ";
 		cin >> verified;
 	} while (verified == "no");
+
+	publishPatientDetails("Patient/Add");
 
 	publishAndSetPatientBusyStatus(false);
 }

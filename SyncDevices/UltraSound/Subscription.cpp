@@ -8,6 +8,10 @@ int messageArrived_sub(void* context, char* topic, int topicLen, MQTTAsync_messa
 		cout << "Subscription end: " << (char*)message->payload << endl;
 		setPatientDetails((char*)message->payload);
 	}
+	if (topicName == "Patient/Add") {
+		cout << "Adding information" << (char*) message->payload <<  endl;
+		setPatientDetails((char*)message->payload);
+	}
 
 	fflush(stdout);
 	MQTTAsync_freeMessage(&message);

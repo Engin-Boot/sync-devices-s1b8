@@ -33,6 +33,9 @@
     <ClCompile Include="Subscription.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PatientCounterFileOperations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\MQTTAsync.h">

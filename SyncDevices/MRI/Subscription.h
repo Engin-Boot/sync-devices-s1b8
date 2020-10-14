@@ -15,6 +15,7 @@ using namespace std;
 #define sleep Sleep
 
 extern void setPatientDetails(string);
+extern void incrementPatientCounter();
 
 volatile int finished = 0;
 int subscribed = 0;
@@ -25,7 +26,7 @@ MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
 struct pubsub_opts sub_opts =
 {
 	0, 0, 0, MQTTASYNC_TRACE_MAXIMUM, "\n", 100,
-	MQTTVERSION_DEFAULT, "Patient/Details", "MRI_v1_sub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
+	MQTTVERSION_DEFAULT, "Patient/#", "MRI_v1_sub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
 };
 
 int messageArrived_sub(void* context, char* topic, int topicLen, MQTTAsync_message* message);

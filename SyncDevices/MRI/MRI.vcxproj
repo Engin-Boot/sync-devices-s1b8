@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MRI.cpp" />
+    <ClCompile Include="PatientCounterFileOperations.cpp" />
     <ClCompile Include="PatientWrapper.cpp" />
     <ClCompile Include="Procedure.cpp" />
     <ClCompile Include="Publisher.cpp" />

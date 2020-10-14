@@ -12,7 +12,7 @@ extern int publish(string topicName, string message);
 Patient originalPatientDetails;
 Patient temporaryPatientDetails;
 
-void publishPatientDetails();
+void publishPatientDetails(string topicName);
 void publishAndSetPatientName(string newName);
 void publishAndSetPatientGender(string newGender);
 void publishAndSetPatientAge(int newAge);
