@@ -1,11 +1,7 @@
 #include <iostream>
+#include "Menu.h"
 
 using namespace std;
-
-extern void addNewPatient();
-extern void editPatientInfo();
-extern void startProcedure();
-extern void printPatientInformation();
 
 void checkAndExecuteAddPatient(int choice) {
 	if (choice == 1) {
@@ -65,5 +61,4 @@ void mainMenu() {
 	} while (choice != 'q');
 
 	// write code to clear sessions, expty required things.. and have a graceful exit..
-
 }

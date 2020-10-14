@@ -1,15 +1,4 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
-#include "inc/Patient.h"
-
-using namespace std;
-
-extern int publish(string topicName, string message);
-
-Patient originalPatientDetails;
-Patient temporaryPatientDetails;
+#include "PatientWrapper.h"
 
 void publishPatientDetails() {
 	publish("Patient/Details", temporaryPatientDetails.toString());
@@ -98,7 +87,7 @@ bool userConfirmationPage() {
 void addNewPatient() {
 	string strInput, verified;
 	int intInput;
-	
+
 	if (!userConfirmationPage()) {
 		return;
 	}
@@ -186,7 +175,7 @@ void editPatientInfo() {
 	}
 
 	publishAndSetPatientBusyStatus(true);
-	
+
 	cout << "The following are the entered patient information: " << endl;
 	printPatientInformation();
 
@@ -197,7 +186,7 @@ void editPatientInfo() {
 	checkAndPromptforAge(choice);
 	checkAndPromptforGender(choice);
 	checkAndPromptforProcedureName(choice);
-	
+
 	publishAndSetPatientBusyStatus(false);
 }
 
@@ -217,6 +206,6 @@ void setPatientDetails(string details) {
 	originalPatientDetails.setReportIds(params[5]);
 	bool val = params[6] == "1";
 	originalPatientDetails.setBusyStatus(val);
-	
+
 	temporaryPatientDetails = originalPatientDetails;
 }

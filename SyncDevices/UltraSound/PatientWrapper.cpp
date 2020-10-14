@@ -1,15 +1,4 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
-#include "inc/Patient.h"
-
-using namespace std;
-
-extern int publish(string topicName, string message);
-
-Patient originalPatientDetails;
-Patient temporaryPatientDetails;
+#include "PatientWrapper.h"
 
 void publishPatientDetails() {
 	publish("Patient/Details", temporaryPatientDetails.toString());

@@ -1,30 +1,4 @@
-#include <iostream>
-#include <windows.h>
-#include <cstdio>
-#include <stdlib.h>
-#include <string>
-
-#include "inc/MQTTAsync.h"
-#include "inc/MQTTClientPersistence.h"
-#include "inc/pubsub_opts.h"
-
-using namespace std;
-
-#define sleep Sleep
-
-extern void setPatientDetails(string);
-
-volatile int finished = 0;
-int subscribed = 0;
-int disconnected = 0;
-
-MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
-
-struct pubsub_opts sub_opts =
-{
-	0, 0, 0, MQTTASYNC_TRACE_MAXIMUM, "\n", 100,
-	MQTTVERSION_DEFAULT, "Patient/Details", "ECG_v1_sub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
-};
+#include "Subscription.h"
 
 int messageArrived_sub(void* context, char* topic, int topicLen, MQTTAsync_message* message)
 {

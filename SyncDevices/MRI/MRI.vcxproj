@@ -159,6 +159,11 @@
     <ClInclude Include="inc\MQTTSubscribeOpts.h" />
     <ClInclude Include="inc\Patient.h" />
     <ClInclude Include="inc\pubsub_opts.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="PatientWrapper.h" />
+    <ClInclude Include="Procedure.h" />
+    <ClInclude Include="Publisher.h" />
+    <ClInclude Include="Subscription.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

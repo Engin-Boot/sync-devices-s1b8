@@ -15,8 +15,8 @@ private:
     bool busy;
 
 public:
-    Patient(){}
-    Patient(const string &Name, const string &Gender, int Age, const string &ProcedureName) : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), busy(false) {}
+    Patient() {}
+    Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), busy(false) {}
 
     Patient& operator=(const Patient& p) {
         this->name = p.name;
