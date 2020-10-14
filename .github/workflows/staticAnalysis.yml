@@ -1,0 +1,19 @@
+name: Static analysis
+
+on: [push, pull_request]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install lizard
+      run: pip install lizard
+
+    - name: Limit complexity
+      working-directory: SyncDevices
+      run: $HOME/.local/bin/lizard --CCN 3

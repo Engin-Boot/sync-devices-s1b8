@@ -1,0 +1,25 @@
+name: Build and Run
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.1
+      with:
+        vs-version: '[16.7,16.8)'
+    
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NuGetAPIKey }}
+        nuget-version: '5.x'
+    - run: nuget restore SyncDevices/SyncDevices.sln
+
+    - name: MSBuild
+      working-directory: SyncDevices
+      run: msbuild SyncDevices.sln /p:OutDir="build_output"
