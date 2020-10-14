@@ -21,7 +21,7 @@ MQTTAsync client_pub;
 struct pubsub_opts opts =
 {
 	1, 0, 0, MQTTASYNC_TRACE_MAXIMUM, "\n", 100,  	/* debug/app options */
-	MQTTVERSION_DEFAULT, NULL, "MRI_v1_pub", 0, 0, "localhost", "1883", NULL, 10, /* MQTT options */
+	MQTTVERSION_DEFAULT, NULL, "MRI_v1_pub", 2, 0, "localhost", "1883", NULL, 10, /* MQTT options */
 };
 
 int messageArrived(void* context, char* topicName, int topicLen, MQTTAsync_message* m);
