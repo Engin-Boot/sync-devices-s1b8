@@ -24,6 +24,9 @@ jobs:
       working-directory: SyncDevices
       run: msbuild SyncDevices.sln /p:OutDir="build_output"
     
+    - name: Add paho.mqtt.c client library
+      run: git clone https://github.com/eclipse/paho.mqtt.c
+    
     - name: Install Mosquitto
       run : git clone https://github.com/eclipse/mosquitto
     
