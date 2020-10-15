@@ -25,7 +25,7 @@ jobs:
       run: msbuild SyncDevices.sln /p:OutDir="build_output"
     
     - name: Install Mosquitto
-      run : apt-get install mosquitto
+      run : cd install mosquitto
     
     - name: Testing MRI modules
       working-directory: SyncDevices
