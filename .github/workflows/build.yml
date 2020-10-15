@@ -23,3 +23,23 @@ jobs:
     - name: MSBuild
       working-directory: SyncDevices
       run: msbuild SyncDevices.sln /p:OutDir="build_output"
+    
+    - name: Install Mosquitto
+      run : sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
+            sudo apt-get update
+    
+    - name: Testing MRI modules
+      working-directory: SyncDevices
+      shell: cmd
+      run: MRITest\build_output\MRITest.exe
+    
+    - name: Testing ECG modules
+      working-directory: SyncDevices
+      shell: cmd
+      run: ECGTest\build_output\ECGTest.exe
+    
+    - name: Testing UltraSound modules
+      working-directory: SyncDevices
+      shell: cmd
+      run: UltraSoundTest\build_output\UltraSoundTest.exe
+    
