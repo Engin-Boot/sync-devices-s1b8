@@ -23,28 +23,4 @@ jobs:
     - name: MSBuild
       working-directory: SyncDevices
       run: msbuild SyncDevices.sln /p:OutDir="build_output"
-    
-    - name: Add paho.mqtt.c client library
-      run: git clone https://github.com/eclipse/paho.mqtt.python.git
-           cd paho.mqtt.c
-           maje -j
-           sudo make install
-    
-    - name: Install Mosquitto
-      run : git clone https://github.com/eclipse/mosquitto
-    
-    - name: Testing MRI modules
-      working-directory: SyncDevices
-      shell: cmd
-      run: MRITest\build_output\MRITest.exe
-    
-    - name: Testing ECG modules
-      working-directory: SyncDevices
-      shell: cmd
-      run: ECGTest\build_output\ECGTest.exe
-    
-    - name: Testing UltraSound modules
-      working-directory: SyncDevices
-      shell: cmd
-      run: UltraSoundTest\build_output\UltraSoundTest.exe
-    
+  
