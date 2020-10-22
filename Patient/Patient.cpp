@@ -1,5 +1,19 @@
 #include "Patient.hpp"
 
+    string name;
+    string gender;
+    int age;
+    string procedureName;
+    string consumables;
+    string reportIds;
+    bool busy;
+
+Patient::Patient()
+    : name(""), gender(""), age(0), procedureName(""), consumables(""), reportIds(""), busy(false) {}
+
+Patient::Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) 
+    : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds(""), busy(false)  {}
+
 Patient& Patient::operator=(const Patient& p) {
     this->name = p.name;
     this->gender = p.gender;
