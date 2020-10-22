@@ -259,3 +259,6 @@ build_tools_fortify.def
 # Ignore all files in bin folder except .gitignore
 **/bin/*/*
 !**/bin/*/.gitignore
+
+# Html reports
+*.html
