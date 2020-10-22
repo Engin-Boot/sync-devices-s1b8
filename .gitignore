@@ -262,3 +262,6 @@ build_tools_fortify.def
 
 # Html reports
 *.html
+
+# VS Code config
+.vscode
