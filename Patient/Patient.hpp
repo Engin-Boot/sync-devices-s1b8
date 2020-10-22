@@ -17,10 +17,10 @@ private:
 
 public:
     Patient()
-    : name("none"), gender("none"), age(0), procedureName("none"), busy(false) {}
+    : name("none"), gender("none"), age(0), procedureName("none"), busy(false), reportIds(""), consumables("") {}
 
     Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) 
-    : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), busy(false) {}
+    : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), busy(false), reportIds(""), consumables("") {}
 
     Patient& operator=(const Patient& p);
     string getName();
