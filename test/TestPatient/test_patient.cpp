@@ -6,10 +6,10 @@ using namespace std;
 
 TEST(CreatePatientObject, create_default_patient)
 {
-    string expected_name = "none";
-    string expected_gender = "none";
+    string expected_name = "";
+    string expected_gender = "";
     int expected_age = 0;
-    string expected_procedure = "none";
+    string expected_procedure = "";
 
     Patient default_patient;
 
@@ -38,6 +38,102 @@ TEST(CreatePatientObject, create_custom_patient)
 }
 
 
+TEST(APITest, test_getters_and_setters)
+{
+    Patient patient;
+
+    patient.setName("ABC");
+    patient.setAge(20);
+    patient.setGender("Male");
+    patient.setProcedureName("Cardiac");
+    patient.setBusyStatus(true);
+
+    EXPECT_STREQ("ABC", patient.getName().c_str());
+    EXPECT_STREQ("Male", patient.getGender().c_str());
+    EXPECT_STREQ("Cardiac", patient.getProcedureName().c_str());
+    EXPECT_EQ(20, patient.getAge());
+    EXPECT_TRUE(patient.getBusyStatus());
+}
+
+TEST(APITest, test_to_string_method)
+{
+    Patient patient;
+
+    patient.setName("ABC");
+    patient.setAge(20);
+    patient.setGender("Male");
+    patient.setProcedureName("Cardiac");
+    patient.setBusyStatus(true);
+    string expected_string = "ABC;Male;20;Cardiac;;;1";
+    EXPECT_STREQ(expected_string.c_str(), patient.toString().c_str());
+}
+
+TEST(APITest, test_add_single_report_id)
+{
+    Patient patient;
+    EXPECT_STREQ("", patient.getReportIds().c_str());
+    patient.addReportId("12");
+    EXPECT_STREQ("12", patient.getReportIds().c_str());
+}
+
+TEST(APITest, test_add_single_consumable)
+{
+    Patient patient;
+    EXPECT_STREQ("", patient.getConsumables().c_str());
+    patient.addConsumable("Gloves");
+    EXPECT_STREQ("Gloves", patient.getConsumables().c_str());
+}
+
+TEST(APITest, test_add_multiple_report_ids)
+{
+    Patient patient;
+    patient.addReportId("11");
+    EXPECT_STREQ("11", patient.getReportIds().c_str());
+    patient.addReportId("12");
+    EXPECT_STREQ("11,12", patient.getReportIds().c_str());
+    patient.addReportId("13");
+    EXPECT_STREQ("11,12,13", patient.getReportIds().c_str());
+}
+
+TEST(APITest, test_add_multiple_consumables)
+{
+    Patient patient;
+    patient.addConsumable("Gloves");
+    EXPECT_STREQ("Gloves", patient.getConsumables().c_str());
+    patient.addConsumable("Mask");
+    EXPECT_STREQ("Gloves,Mask", patient.getConsumables().c_str());
+}
+
+
+TEST(APITest, test_patient_isFree)
+{
+    Patient patient;
+    EXPECT_TRUE(patient.isFree());
+    patient.setBusyStatus(true);
+    EXPECT_FALSE(patient.isFree());
+}
+
+
+TEST(APITest, test_patient_isEmpty)
+{
+    Patient patient;
+    EXPECT_TRUE(patient.isEmpty());
+    patient.setName("ABC");
+    EXPECT_FALSE(patient.isEmpty());
+}
+
+
+TEST(Operator_Test, Assignment_Operator)
+{
+    Patient p1("ABC", "Male", 20, "Cardiac");
+    Patient p2;
+    p2 = p1;
+    EXPECT_STREQ(p1.getName().c_str(), p2.getName().c_str());
+    EXPECT_STREQ(p1.getGender().c_str(), p2.getGender().c_str());
+    EXPECT_STREQ(p1.getProcedureName().c_str(), p2.getProcedureName().c_str());
+    EXPECT_EQ(p1.getAge(), p2.getAge());
+    EXPECT_EQ(p1.getBusyStatus(), p2.getBusyStatus());
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
