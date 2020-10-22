@@ -21,6 +21,5 @@ jobs:
     
     - name: Patient Coverage report
       run: | 
-            mv *.gc* test/$1/
-            gcov -r test/$1/*.cpp 
-            
+            mv *.gc* test/TestPatient/
+            gcov -r test/TestPatient/*.cpp 
