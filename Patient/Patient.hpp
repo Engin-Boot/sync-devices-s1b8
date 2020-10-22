@@ -34,8 +34,6 @@ public:
     void setGender(const string& newGender);
     void setAge(int newAge);
     void setProcedureName(const string& newProcedureName);
-    void setConsumables(const string& newConsumables);
-    void setReportIds(const string& newReportIds);
     void setBusyStatus(bool newStatus);
     void addConsumable(const string& newConsumable);
     void addReportId(const string& newReportId);

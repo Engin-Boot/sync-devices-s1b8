@@ -55,14 +55,6 @@ void Patient::setProcedureName(const string& newProcedureName) {
     procedureName = newProcedureName;
 }
 
-void Patient::setConsumables(const string& newConsumables) {
-    consumables = newConsumables;
-}
-
-void Patient::setReportIds(const string& newReportIds) {
-    reportIds = newReportIds;
-}
-
 void Patient::setBusyStatus(bool newStatus) {
     busy = newStatus;
 }
