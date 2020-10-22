@@ -1,0 +1,26 @@
+name: Build and Run Unit Tests
+
+on:
+  pull_request:
+  push:
+    branches: [ sync-devices-s1b12 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: build Patient
+      run: g++ -Wall -Wextra -Werror --coverage test/$1/*.cpp -o testchecker
+      
+    - name: test Patient
+      run: ./testchecker
+    
+    - name: Patient Coverage report
+      run: | 
+            mv *.gc* test/$1/
+            gcov -r test/$1/*.cpp 
+            
