@@ -17,7 +17,7 @@ jobs:
       run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
     
     - name: build Patient
-      run: g++ -Wall -Wextra -Werror --coverage test/TestPatient/*.cpp -o testchecker
+      run: g++ -Wall -Wextra -Werror --coverage test/TestPatient/*.cpp -o testchecker -lgtest -lgtest_main -pthread
       
     - name: test Patient
       run: ./testchecker
