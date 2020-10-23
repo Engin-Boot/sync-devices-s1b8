@@ -6,13 +6,12 @@
     string procedureName;
     string consumables;
     string reportIds;
-    bool busy;
 
 Patient::Patient()
-    : name(""), gender(""), age(0), procedureName(""), consumables(""), reportIds(""), busy(false) {}
+    : name(""), gender(""), age(0), procedureName(""), consumables(""), reportIds("") {}
 
 Patient::Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) 
-    : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds(""), busy(false)  {}
+    : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds("") {}
 
 Patient& Patient::operator=(const Patient& p) {
     this->name = p.name;
@@ -21,7 +20,6 @@ Patient& Patient::operator=(const Patient& p) {
     this->procedureName = p.procedureName;
     this->consumables = p.consumables;
     this->reportIds = p.reportIds;
-    this->busy = p.busy;
     return *this;
 }
 
@@ -49,9 +47,6 @@ string Patient::getReportIds() {
     return reportIds;
 }
 
-bool Patient::getBusyStatus() {
-    return busy;
-}
 
 void Patient::setName(const string& newName) {
     name = newName;
@@ -67,11 +62,7 @@ void Patient::setAge(int newAge) {
 
 void Patient::setProcedureName(const string& newProcedureName) {
     procedureName = newProcedureName;
-}
 
-void Patient::setBusyStatus(bool newStatus) {
-    busy = newStatus;
-}
 
 void Patient::addConsumable(const string& newConsumable) {
     if (consumables.empty()) {
@@ -91,21 +82,8 @@ void Patient::addReportId(const string& newReportId) {
     }
 }
 
-bool Patient::isEmpty() {
-    if (name.empty()) {
-        return true;
-    }
-    return false;
-}
-
-bool Patient::isFree() {
-    if (busy) {
-        return false;
-    }
-    return true;
-}
 
 string Patient::toString() {
-    string result = name + ";" + gender + ";" + to_string(age) + ";" + procedureName + ";" + consumables + ";" + reportIds + ";" + to_string(busy);
+    string result = name + ";" + gender + ";" + to_string(age) + ";" + procedureName + ";" + consumables + ";" + reportIds;
     return result;
 }

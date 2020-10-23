@@ -13,7 +13,6 @@ private:
     string procedureName;
     string consumables;
     string reportIds;
-    bool busy;
 
 public:
     Patient();
@@ -26,15 +25,11 @@ public:
     string getProcedureName();
     string getConsumables();
     string getReportIds();
-    bool getBusyStatus();
     void setName(const string& newName);
     void setGender(const string& newGender);
     void setAge(int newAge);
     void setProcedureName(const string& newProcedureName);
-    void setBusyStatus(bool newStatus);
     void addConsumable(const string& newConsumable);
     void addReportId(const string& newReportId);
-    bool isEmpty();
-    bool isFree();
     string toString();
 };
