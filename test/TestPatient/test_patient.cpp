@@ -17,7 +17,6 @@ TEST(CreatePatientObject, create_default_patient)
     EXPECT_STREQ(expected_gender.c_str(), default_patient.getGender().c_str());
     EXPECT_STREQ(expected_procedure.c_str(), default_patient.getProcedureName().c_str());
     EXPECT_EQ(expected_age, default_patient.getAge());
-    EXPECT_FALSE(default_patient.getBusyStatus());
 }
 
 
@@ -34,7 +33,6 @@ TEST(CreatePatientObject, create_custom_patient)
     EXPECT_STREQ(expected_gender.c_str(), custom_patient.getGender().c_str());
     EXPECT_STREQ(expected_procedure.c_str(), custom_patient.getProcedureName().c_str());
     EXPECT_EQ(expected_age, custom_patient.getAge());
-    EXPECT_FALSE(custom_patient.getBusyStatus());
 }
 
 
@@ -46,13 +44,11 @@ TEST(APITest, test_getters_and_setters)
     patient.setAge(20);
     patient.setGender("Male");
     patient.setProcedureName("Cardiac");
-    patient.setBusyStatus(true);
 
     EXPECT_STREQ("ABC", patient.getName().c_str());
     EXPECT_STREQ("Male", patient.getGender().c_str());
     EXPECT_STREQ("Cardiac", patient.getProcedureName().c_str());
     EXPECT_EQ(20, patient.getAge());
-    EXPECT_TRUE(patient.getBusyStatus());
 }
 
 TEST(APITest, test_to_string_method)
@@ -63,8 +59,7 @@ TEST(APITest, test_to_string_method)
     patient.setAge(20);
     patient.setGender("Male");
     patient.setProcedureName("Cardiac");
-    patient.setBusyStatus(true);
-    string expected_string = "ABC;Male;20;Cardiac;;;1";
+    string expected_string = "ABC;Male;20;Cardiac;;";
     EXPECT_STREQ(expected_string.c_str(), patient.toString().c_str());
 }
 
@@ -105,24 +100,6 @@ TEST(APITest, test_add_multiple_consumables)
 }
 
 
-TEST(APITest, test_patient_isFree)
-{
-    Patient patient;
-    EXPECT_TRUE(patient.isFree());
-    patient.setBusyStatus(true);
-    EXPECT_FALSE(patient.isFree());
-}
-
-
-TEST(APITest, test_patient_isEmpty)
-{
-    Patient patient;
-    EXPECT_TRUE(patient.isEmpty());
-    patient.setName("ABC");
-    EXPECT_FALSE(patient.isEmpty());
-}
-
-
 TEST(Operator_Test, Assignment_Operator)
 {
     Patient p1("ABC", "Male", 20, "Cardiac");
@@ -132,7 +109,6 @@ TEST(Operator_Test, Assignment_Operator)
     EXPECT_STREQ(p1.getGender().c_str(), p2.getGender().c_str());
     EXPECT_STREQ(p1.getProcedureName().c_str(), p2.getProcedureName().c_str());
     EXPECT_EQ(p1.getAge(), p2.getAge());
-    EXPECT_EQ(p1.getBusyStatus(), p2.getBusyStatus());
 }
 
 int main(int argc, char **argv) {
