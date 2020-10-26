@@ -27,6 +27,13 @@ string Patient::getName() {
     return name;
 }
 
+bool Patient::isEmpty() {
+    if (name.empty()) {
+        return true;
+    }
+    return false;
+}
+
 string Patient::getGender() {
     return gender;
 }
@@ -62,7 +69,7 @@ void Patient::setAge(int newAge) {
 
 void Patient::setProcedureName(const string& newProcedureName) {
     procedureName = newProcedureName;
-
+}
 
 void Patient::addConsumable(const string& newConsumable) {
     if (consumables.empty()) {
@@ -80,6 +87,16 @@ void Patient::addReportId(const string& newReportId) {
     else {
         reportIds = reportIds + "," + newReportId;
     }
+}
+
+void Patient::setConsumables(const string& newConsumables)
+{
+    consumables = newConsumables;
+}
+
+void Patient::setReportIds(const string& newReportIds)
+{
+    reportIds = newReportIds;
 }
 
 
