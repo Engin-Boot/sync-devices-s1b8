@@ -91,7 +91,7 @@ class PatientWrapper:
 
 
     @staticmethod
-    def get_serialized_patient_info():
+    def get_patient_info():
         name = input("Enter patient name: ")
         age = int(input("Enter age: "))
         gender = input("Enter gender: ")
@@ -103,13 +103,19 @@ class PatientWrapper:
         settings.temporary_patient.setGender(gender)
         settings.temporary_patient.setProcedureName(procedure_name)
 
+        return settings.temporary_patient
+    
+    @staticmethod
+    def get_serialized_patient_info():
         return settings.temporary_patient.toString()
+    
 
     @staticmethod
     def addNewPatient():
         client = settings.client
         settings.update_patient_count()
-        msg = PatientWrapper.get_serialized_patient_info()
+        patient_info = PatientWrapper.get_patient_info()
+        msg = PatientWrapper.get_serialized_patient_info(patient_info)
         client.publish(settings.topic, msg)
         while not client.published:
             time.sleep(1)
