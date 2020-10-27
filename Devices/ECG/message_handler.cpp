@@ -21,7 +21,7 @@ vector<string> split(const char* data)
 void handle_incoming_messages(void *context, char *topicName, int topicLen, MQTTAsync_message *message)
 {
     vector<string> contents = split((char*)message->payload);
-    original_patient.setId(stoi(contents[0]));
+    original_patient.setId(contents[0]);
     original_patient.setName(contents[1]);
     original_patient.setGender(contents[2]);
     original_patient.setAge(stoi(contents[3]));

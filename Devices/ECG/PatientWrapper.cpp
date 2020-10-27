@@ -1,4 +1,5 @@
 #include "PatientWrapper.hpp"
+#include <ctime>
 
 void addConsumable(const string& consumable)
 {
@@ -16,6 +17,13 @@ bool isPatientDataAvailable() {
 		return false;
 	}
 	return true;
+}
+
+string generate_patient_id(const string& name)
+{
+	srand((unsigned)time(0));
+	int num = rand() % 2000;
+	return name + to_string(num);
 }
 
 void addNewPatient()
@@ -45,6 +53,9 @@ void addNewPatient()
 		cin >> verified;
 	} while (verified == "no");
     publishable = true;
+	string name = temporary_patient.getName();
+	string patient_id = generate_patient_id(name);
+	temporary_patient.setId(patient_id);
     serialized_data = temporary_patient.toString();
 }
 
