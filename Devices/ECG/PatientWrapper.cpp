@@ -91,13 +91,32 @@ void addNewPatient()
 	publishable = true;
 }
 
+void setName(const string& name)
+{
+	temporary_patient.setName(name);
+}
+
+void setAge(int intInput)
+{
+	temporary_patient.setAge(intInput);
+}
+
+void setGender(const string& strInput)
+{
+	temporary_patient.setGender(strInput);
+}
+
+void setProcedureName(const string& strInput)
+{
+	temporary_patient.setProcedureName(strInput);
+}
 
 void editName()
 {
 	string strInput;
 	cout << "Enter new Name: ";
 	cin >> strInput;
-	temporary_patient.setName(strInput);
+	setName(strInput);
 }
 
 void editAge()
@@ -105,7 +124,7 @@ void editAge()
 	int intInput;
 	cout << "Enter new age: ";
 	cin >> intInput;
-	temporary_patient.setAge(intInput);
+	setAge(intInput);
 }
 
 void editGender()
@@ -113,7 +132,7 @@ void editGender()
 	string strInput;
 	cout << "Enter new gender: ";
 	cin >> strInput;
-	temporary_patient.setGender(strInput);
+	setGender(strInput);	
 }
 
 void editProcedure()
@@ -121,7 +140,7 @@ void editProcedure()
 	string strInput;
 	cout << "Enter new procedure name: ";
 	cin >> strInput;
-	temporary_patient.setProcedureName(strInput);
+	setProcedureName(strInput);
 }
 
 
