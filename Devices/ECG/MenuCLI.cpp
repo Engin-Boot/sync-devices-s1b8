@@ -10,7 +10,7 @@ void DisplayChoices() {
 	cout << "3. Start Procedure" << endl;
 	cout << "4. Print Patient Data" << endl;
     cout << "5. Exit" << endl;
-	cout << "Your choice (1/2/3/4)? ";
+	cout << "Your choice (1/2/3/4/5)? ";
 }
 
 void displayEditMenu()

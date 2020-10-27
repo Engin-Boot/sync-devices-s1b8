@@ -30,6 +30,8 @@ extern int subscribed;
 extern int published;
 extern int disconnected;
 
+extern void handle_incoming_messages(void *context, char *topicName, int topicLen, MQTTAsync_message *message);
+
 void mysleep(int ms);
 
 void disconnect_client(MQTTAsync &client, MQTTAsync_disconnectOptions &disc_opts);

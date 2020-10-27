@@ -52,7 +52,6 @@ TEST(APITest, test_getters_and_setters)
     EXPECT_EQ(20, patient.getAge());
     EXPECT_EQ(3,patient.getId());
     EXPECT_EQ(1,patient.getBusyStatus());
-
 }
 
 TEST(APITest, test_to_string_method)
