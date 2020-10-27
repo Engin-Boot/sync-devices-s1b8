@@ -19,9 +19,8 @@ private:
 public:
     Patient();
     Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName);
-
+    Patient(const Patient& other);
     Patient& operator=(const Patient& p);
-    string getId();
     string getName();
     string getGender();
     int getAge();

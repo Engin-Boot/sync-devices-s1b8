@@ -6,6 +6,9 @@ Patient :: Patient()
 Patient::Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) 
     : id(""),name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds(""),busy(0) {}
 
+Patient::Patient(const Patient& p):
+    id(p.id), name(p.name), gender(p.gender), age(p.age), procedureName(p.procedureName), consumables(p.consumables), reportIds(p.reportIds), busy(p.busy) {}
+
 Patient& Patient::operator=(const Patient& p) {
     this->id = p.id;
     this->name = p.name;
@@ -18,9 +21,6 @@ Patient& Patient::operator=(const Patient& p) {
     return *this;
 }
 
-string Patient::getId(){
-    return id;
-}
 
 string Patient::getName() {
     return name;
