@@ -20,27 +20,41 @@ class PatientWrapper:
     def isPatientDataAvailable():
         return settings.original_patient.getId != 0
 
+    @staticmethod
+    def setName(name):
+        settings.temporary_patient.setName(name)
+    
+    @staticmethod
+    def setAge(age):
+        settings.temporary_patient.setAge(age)        
+
+    @staticmethod
+    def setGender(gender):
+        settings.temporary_patient.setGender(gender)
+    
+    @staticmethod
+    def setProcedureName(procedureName):
+        settings.temporary_patient.setProcedureName(procedureName)
 
     @staticmethod
     def EditName():
         name = input("Enter corrected name: ")
-        settings.temporary_patient.setName(name)
-
+        PatientWrapper.setName(name)
 
     @staticmethod
     def EditAge():
         age = int(input("Enter corrected age: "))
-        settings.temporary_patient.setAge(age)
+        PatientWrapper.setAge(age)
 
     @staticmethod
     def EditGender():
         gender = input("Enter corrected gender: ")
-        settings.temporary_patient.setGender(gender)
+        PatientWrapper.setGender(gender)
 
     @staticmethod
     def EditProcedureName():
         procedureName = input("Enter procedure name: ")
-        settings.temporary_patient.setProcedureName(procedureName)
+        PatientWrapper.setProcedureName(procedureName)
 
     @staticmethod
     def EditAll():
@@ -89,6 +103,13 @@ class PatientWrapper:
         msg = settings.temporary_patient.toString()
         client.publish(settings.topic, msg)
 
+    @staticmethod
+    def set_patient_info(name, age, gender, procedure_name):
+        settings.temporary_patient.setId(settings.get_patient_count())
+        settings.temporary_patient.setName(name)
+        settings.temporary_patient.setAge(age)
+        settings.temporary_patient.setGender(gender)
+        settings.temporary_patient.setProcedureName(procedure_name)
 
     @staticmethod
     def get_patient_info():
@@ -97,13 +118,7 @@ class PatientWrapper:
         gender = input("Enter gender: ")
         procedure_name = input("Enter procedure name: ")
 
-        settings.temporary_patient.setId(settings.get_patient_count())
-        settings.temporary_patient.setName(name)
-        settings.temporary_patient.setAge(age)
-        settings.temporary_patient.setGender(gender)
-        settings.temporary_patient.setProcedureName(procedure_name)
-
-        return settings.temporary_patient
+        return (name, age, gender, procedure_name)
     
     @staticmethod
     def get_serialized_patient_info():
@@ -115,7 +130,8 @@ class PatientWrapper:
         client = settings.client
         settings.update_patient_count()
         patient_info = PatientWrapper.get_patient_info()
-        msg = PatientWrapper.get_serialized_patient_info(patient_info)
+        PatientWrapper.set_patient_info(*patient_info)
+        msg = PatientWrapper.get_serialized_patient_info()
         client.publish(settings.topic, msg)
         while not client.published:
             time.sleep(1)
