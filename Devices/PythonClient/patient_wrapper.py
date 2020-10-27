@@ -110,6 +110,8 @@ class PatientWrapper:
         settings.temporary_patient.setAge(age)
         settings.temporary_patient.setGender(gender)
         settings.temporary_patient.setProcedureName(procedure_name)
+        settings.temporary_patient.setConsumables("")
+        settings.temporary_patient.setReportIds("")
 
     @staticmethod
     def getPatientInfo():
