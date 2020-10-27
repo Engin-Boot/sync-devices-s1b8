@@ -1,7 +1,1 @@
-{
-    "catheter":{
-        "procedures": ["cardiac"],
-        "quantity" : 4,
-        "threshold" : 3
-    }
-}
+{"catheter": {"procedures": ["cardiac"], "quantity": 4, "threshold": 3}}

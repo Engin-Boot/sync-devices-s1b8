@@ -1,7 +1,14 @@
 from patient import Patient
 from patient_wrapper import PatientWrapper
+from inventory_manager import InventoryManager
 import paho.mqtt.client as mqtt
 import json
+import os
+
+
+def update_inventory(procedure):
+    global inv_manager
+    inv_manager.updateInventory(procedure)
 
 
 def exitApplication():
@@ -9,6 +16,14 @@ def exitApplication():
     print("Exiting application...")
     exit_application = True
 
+
+def init_mail_params():
+    global sender_email_id
+    global receiver_email_id
+    global password
+    sender_email_id = os.getenv('EMAIL_ID_SENDER')
+    receiver_email_id = os.getenv('EMAIL_ID_RECEIVER')
+    password = os.getenv('SENDER_PASSWORD')
 
 def create_and_init_client():
     global client
@@ -26,6 +41,7 @@ def init_globals():
     global port
     global main_menu_functions_map
     global edit_menu_functions_map
+    global inv_manager
 
     main_menu_functions_map = {
         "1": PatientWrapper.addNewPatient,
@@ -43,6 +59,9 @@ def init_globals():
         "4": PatientWrapper.editProcedureName,
         "5": PatientWrapper.editAll
     }
+
+    inventory_filepath = "json_data/inventory.json"
+    inv_manager = InventoryManager(inventory_filepath)
 
     exit_application = False
     host = "localhost"
