@@ -54,6 +54,10 @@ class PatientWrapper:
     def editProcedureName():
         procedureName = input("Enter procedure name: ")
         PatientWrapper.setProcedureName(procedureName)
+        current_procedure_name = settings.original_patient.getProcedureName()
+        new_procedure_name = settings.temporary_patient.getProcedureName()
+        if current_procedure_name != new_procedure_name: 
+            settings.update_inventory()
 
     @staticmethod
     def editAll():
@@ -136,6 +140,7 @@ class PatientWrapper:
         client.publish(settings.topic, msg)
         while not client.published:
             time.sleep(1)
+        settings.update_inventory(settings.temporary_patient.getProcedureName())
 
     @staticmethod
     def editPatient():
