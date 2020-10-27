@@ -101,7 +101,7 @@ class PatientWrapper:
         PatientWrapper.setAndPublishBusyStatus(client, 1)
 
         PatientWrapper.procedure(repeat_count=3)
-        reportId = "MRI " + str(random.randint(100, 3000))
+        reportId = "MRI" + str(random.randint(100, 3000))
         settings.temporary_patient.addReportIds(reportId)
 
         settings.temporary_patient.setBusyStatus(0)
@@ -169,12 +169,14 @@ class PatientWrapper:
 
     @staticmethod
     def printPatientInformation():
+        print("                      Patient Information                 ")
+        print()
         print("Name: ", settings.original_patient.getName())
         print("Age: ", settings.original_patient.getAge())
         print("Gender:", settings.original_patient.getGender())
         print("Procedure Name: ", settings.original_patient.getProcedureName())
         print("Consumables: ", settings.original_patient.getConsumables())
-        print("Report IDs", settings.original_patient.getReportIds())
+        print("Report IDs: ", settings.original_patient.getReportIds())
 
     @staticmethod
     def printPatientCount():

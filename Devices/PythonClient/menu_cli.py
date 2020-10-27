@@ -10,6 +10,8 @@ class MenuCLI:
         print("4. View Patient Details")
         print("5. View Patient Count")
         print("6. Exit")
+        print("your choice? (1/2/3/4/5/6)")
+        print()
 
     @staticmethod
     def displayEditMenu():
@@ -18,3 +20,5 @@ class MenuCLI:
         print("3. Edit Gender")
         print("4. Edit Procedure Name")
         print("5. Edit All")
+        print("your choice? (1/2/3/4/5/6)")
+        print()
