@@ -38,7 +38,7 @@ void disconnect_client(MQTTAsync &client, MQTTAsync_disconnectOptions &disc_opts
 
 int mypublish(MQTTAsync client, int datalen, std::string &data, MQTTAsync_responseOptions &pub_opts);
 
-void publish(MQTTAsync &client, MQTTAsync_responseOptions &pub_opts, string &data);
+void publish(const MQTTAsync &client, MQTTAsync_responseOptions &pub_opts, string &data);
 
 void wait_for_disconnection(MQTTAsync &client, MQTTAsync_disconnectOptions &disc_opts);
 

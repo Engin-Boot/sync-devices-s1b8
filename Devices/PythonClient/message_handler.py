@@ -8,6 +8,8 @@ class MessageHandler:
 
         if settings.temporary_patient.getId() != int(contents[0]):
             settings.update_patient_count()
+            settings.update_inventory(contents[4])
+            settings.send_mail_if_stock_low()
 
         settings.original_patient.setId(int(contents[0]))
         settings.original_patient.setName(contents[1])

@@ -4,11 +4,28 @@ from inventory_manager import InventoryManager
 import paho.mqtt.client as mqtt
 import json
 import os
+from mailer import Mailer
 
+def get_formated_message(scracity_details):
+    msg_prefix = "Items List:\n\n\t"
+    return msg_prefix + '\n\t'.join(item for item in scracity_details)
+
+
+def send_mail_if_stock_low():
+    global inv_manager
+    sender_email_id = os.getenv('EMAIL_ID_SENDER')
+    receiver_email_id = os.getenv('EMAIL_ID_RECEIVER')
+    password = os.getenv('SENDER_PASSWORD')
+    mail = Mailer(email=sender_email_id, password=password)
+    scracity_details = inv_manager.getScarcityDetails()
+    if len(scracity_details) != 0:
+        message = get_formated_message(scracity_details)
+        mail.send(receiver=receiver_email_id,
+                  subject='LOW STOCK', message=message)
 
 def update_inventory(procedure):
     global inv_manager
-    inv_manager.updateInventory(procedure)
+    inv_manager.updateInventory(procedure.lower().strip())
 
 
 def exitApplication():
@@ -28,7 +45,7 @@ def init_mail_params():
 def create_and_init_client():
     global client
     global client_id
-    client_id = "client_1"
+    client_id = "Python_Client"
     client = mqtt.Client(client_id)
 
 
@@ -66,7 +83,7 @@ def init_globals():
     exit_application = False
     host = "localhost"
     port = 1883
-    topic = "topic_1"
+    topic = "MedicalDevice"
     original_patient = Patient()
     temporary_patient = Patient()
 
