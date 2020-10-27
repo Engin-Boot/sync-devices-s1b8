@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include "../Patient/Patient.hpp"
+#include "../../Patient/Patient.hpp"
 #include "MQTTAsync.h"
 
 extern Patient original_patient;

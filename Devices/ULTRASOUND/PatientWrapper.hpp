@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "../Patient/Patient.hpp"
+#include "../../Patient/Patient.hpp"
 #include "MenuCLI.hpp"
 
 #include <iostream>
@@ -20,8 +20,12 @@ extern string serialized_data;
 extern bool publishable;
 
 extern void PublishToSynchronize();
+PatientInfo getPatientInfo();
+void setPatientInfo(PatientInfo& p_info);
+void generateAndsetPatientId();
 void addConsumable(const string& consumable);
 void addReportId(const string& report_id);
+void setName(const string& name);
 void addNewPatient();
 void editPatientInfo();
 void editName();
