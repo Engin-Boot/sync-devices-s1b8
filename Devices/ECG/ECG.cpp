@@ -1,5 +1,4 @@
 #include "ECG.hpp"
-#include "pubsub.hpp"
 
 void CreateClient(const char* url)
 {

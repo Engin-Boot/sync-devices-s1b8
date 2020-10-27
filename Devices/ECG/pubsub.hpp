@@ -8,21 +8,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include "pubsub_opts.hpp"
 
 using namespace std;
-
-struct pubsub_opts
-{
-    /* Message options */
-    char *message;
-    /* MQTT options */
-    int MQTTVersion;
-    char *topic;
-    char *clientid;
-    int qos;
-    int retained;
-    int keepalive;
-};
 
 extern pubsub_opts opts;
 extern int finished;

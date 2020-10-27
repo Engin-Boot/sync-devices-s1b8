@@ -1,21 +1,4 @@
-#include <iostream>
-#include <string>
-#include <unistd.h>
-#include <ctime>
-
-#define PROCEDURE_RUN_TIME 3
-
-#include "../../Patient/Patient.hpp"
-
-using namespace std;
-
-extern bool isPatientDataAvailable();
-extern void printPatientInformation();
-extern void addConsumable(const string& consumable);
-extern void addReportId(const string& report_id);
-extern bool publishable;
-extern string serialized_data;
-extern Patient temporary_patient;
+#include "Procedure.hpp"
 
 int randomNoGeneration()
 {
@@ -39,11 +22,19 @@ void procedure() {
 	}
 }
 
+
 void startProcedure() {
 	if (!isPatientDataAvailable()) {
 		cout << "No patient details entered.. Please try after entering the patient details! " << endl;
 		return;
 	}
+
+	if(!isPatientFree()) {
+		cout << "The patient data is being used by some other device. Try again after sometime..." << endl;
+		return;
+	}
+
+	setAndPublishPatientBusy();
 
 	cout << "Procedure has started on the patient with below mentioned details! " << endl;
 	printPatientInformation();
@@ -57,7 +48,8 @@ void startProcedure() {
 	addReportId(reportId);
 
 	cout << "Procedure has completed successfully!" << endl;
-	
-	publishable = true;
+
+	unsetPatientBusyStatus();
 	serialized_data = temporary_patient.toString();
+	publishable = true;
 }

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <iostream>
 #include "MQTTAsync.h"
+#include "pubsub.hpp"
+
 using namespace std;
 
 extern MQTTAsync client;

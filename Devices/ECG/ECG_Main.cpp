@@ -1,50 +1,14 @@
-#include "PatientWrapper.hpp"
 #include "ECG.hpp"
-#include "MQTTAsync.h"
-#include "pubsub.hpp"
 #include "MenuCLI.hpp"
+#include "pubsub.hpp"
 
 #define TOPIC "MedicalDevice"
 #define CLIENT_ID "CT_CLIENT_1"
 #define BROKER_URL "tcp://localhost:1883"
 
-Patient original_patient;
-Patient temporary_patient;
-pubsub_opts opts;
-MQTTAsync client;
-
-int finished;
-int subscribed;
-int published;
-int disconnected;
-int exit_application;
-string serialized_data;
-bool publishable;
-
-MQTTAsync_createOptions create_opts;
-MQTTAsync_responseOptions pub_opts;
-MQTTAsync_disconnectOptions disc_opts;
-
-
-void InitGlobals()
-{
-    opts =
-    {
-	    NULL, MQTTVERSION_DEFAULT, (char*)TOPIC, (char*)CLIENT_ID, 0, 0, 20, /* MQTT options */
-    };
-
-    create_opts = MQTTAsync_createOptions_initializer;
-    pub_opts = MQTTAsync_responseOptions_initializer;
-    disc_opts = MQTTAsync_disconnectOptions_initializer;
-
-    finished = 0;
-    subscribed = 0;
-    published = 0;
-    disconnected = 0;
-    exit_application = 0;
-    serialized_data = "";
-    publishable = false;
-}
+extern void set_client_id(char* id);
+extern void set_topic(char* t);
+extern void InitGlobals();
 
 void MainMenu()
 {
@@ -76,6 +40,14 @@ void MainApplication()
 int main()
 {
     const char *broker_url = (const char *)BROKER_URL;
+
+    char* client_id = (char*)CLIENT_ID;
+    
+    char* topic = (char*)TOPIC;
+
+    set_client_id(client_id);
+
+    set_topic(topic);
 
     InitGlobals();
 
