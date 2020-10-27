@@ -2,11 +2,7 @@ import time
 import settings
 from menu_cli import MenuCLI
 from pubsub_util import PubSubUtil
-
 from inventory_manager import InventoryManager
-
-
-
 
 def main_application(client):
     while not settings.exit_application:
@@ -18,8 +14,6 @@ def main_application(client):
 if __name__ == '__main__':
 
     settings.init_globals()
-
-    settings.init_mail_params()
 
     settings.create_and_init_client()
 

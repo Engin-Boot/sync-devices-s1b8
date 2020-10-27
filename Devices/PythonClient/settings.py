@@ -2,26 +2,39 @@ from patient import Patient
 from patient_wrapper import PatientWrapper
 from inventory_manager import InventoryManager
 import paho.mqtt.client as mqtt
+import random
 import json
 import os
 from mailer import Mailer
+
+
+def generate_patient_id(name):
+    return name + str(random.randint(100, 2000))
+
 
 def get_formated_message(scracity_details):
     msg_prefix = "Items List:\n\n\t"
     return msg_prefix + '\n\t'.join(item for item in scracity_details)
 
 
-def send_mail_if_stock_low():
-    global inv_manager
+def format_and_send(scracity_details):
     sender_email_id = os.getenv('EMAIL_ID_SENDER')
     receiver_email_id = os.getenv('EMAIL_ID_RECEIVER')
     password = os.getenv('SENDER_PASSWORD')
+
     mail = Mailer(email=sender_email_id, password=password)
+
+    message = get_formated_message(scracity_details)
+
+    mail.send(receiver=receiver_email_id,
+                subject='LOW STOCK', message=message)
+
+def send_mail_if_stock_low():
+    global inv_manager
     scracity_details = inv_manager.getScarcityDetails()
     if len(scracity_details) != 0:
-        message = get_formated_message(scracity_details)
-        mail.send(receiver=receiver_email_id,
-                  subject='LOW STOCK', message=message)
+        format_and_send(scracity_details)
+
 
 def update_inventory(procedure):
     global inv_manager
@@ -33,14 +46,6 @@ def exitApplication():
     print("Exiting application...")
     exit_application = True
 
-
-def init_mail_params():
-    global sender_email_id
-    global receiver_email_id
-    global password
-    sender_email_id = os.getenv('EMAIL_ID_SENDER')
-    receiver_email_id = os.getenv('EMAIL_ID_RECEIVER')
-    password = os.getenv('SENDER_PASSWORD')
 
 def create_and_init_client():
     global client

@@ -58,6 +58,7 @@ class PatientWrapper:
         new_procedure_name = settings.temporary_patient.getProcedureName()
         if current_procedure_name != new_procedure_name: 
             settings.update_inventory()
+            settings.send_mail_if_stock_low(new_procedure_name)
 
     @staticmethod
     def editAll():
@@ -106,10 +107,11 @@ class PatientWrapper:
         settings.temporary_patient.setBusyStatus(0)
         msg = settings.temporary_patient.toString()
         client.publish(settings.topic, msg)
+    
 
     @staticmethod
     def setPatientInfo(name, age, gender, procedure_name):
-        settings.temporary_patient.setId(settings.get_patient_count())
+        settings.temporary_patient.setId(settings.generate_patient_id(name))
         settings.temporary_patient.setName(name)
         settings.temporary_patient.setAge(age)
         settings.temporary_patient.setGender(gender)
@@ -117,13 +119,16 @@ class PatientWrapper:
         settings.temporary_patient.setConsumables("")
         settings.temporary_patient.setReportIds("")
 
+    
+
     @staticmethod
     def getPatientInfo():
         name = input("Enter patient name: ")
         age = int(input("Enter age: "))
         gender = input("Enter gender: ")
         procedure_name = input("Enter procedure name: ")
-
+        settings.update_inventory(procedure_name)
+        settings.send_mail_if_stock_low()
         return (name, age, gender, procedure_name)
 
     @staticmethod
@@ -136,11 +141,12 @@ class PatientWrapper:
         settings.update_patient_count()
         patient_info = PatientWrapper.getPatientInfo()
         PatientWrapper.setPatientInfo(*patient_info)
+
         msg = PatientWrapper.getSerializedPatientInfo()
         client.publish(settings.topic, msg)
         while not client.published:
             time.sleep(1)
-        settings.update_inventory(settings.temporary_patient.getProcedureName())
+
 
     @staticmethod
     def editPatient():

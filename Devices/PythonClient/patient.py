@@ -1,6 +1,6 @@
 class Patient:
     def __init__(self, name="", age=0, gender="", procedureName=""):
-        self.id = 0
+        self.id = ""
         self.name = name
         self.age = age
         self.gender = gender
@@ -84,4 +84,4 @@ class Patient:
         self.busy == other.getBusyStatus()])
 
     def toString(self):
-        return str(self.id) + ";" + self.name + ";" + self.gender + ";" + str(self.age) + ";" + self.procedureName + ";" + self.consumables + ";" + self.reportIds + ";" + str(self.busy)
+        return self.id + ";" + self.name + ";" + self.gender + ";" + str(self.age) + ";" + self.procedureName + ";" + self.consumables + ";" + self.reportIds + ";" + str(self.busy)
