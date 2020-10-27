@@ -1,0 +1,19 @@
+name: Limit complexity
+
+on:
+  pull_request:
+  push:
+    branches: [ master, sync-devices-s1b12 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install lizard
+      run: pip install lizard
+
+    - name: Limit complexity
+      run: $HOME/.local/bin/lizard --CCN 3 Patient/* Devices/ECG/* 

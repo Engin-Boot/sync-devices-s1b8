@@ -1,0 +1,21 @@
+name: Static Analysis
+
+on:
+  pull_request:
+  push:
+    branches: [ master, sync-devices-s1b12 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: install cppcheck static analysis
+      run: sudo apt-get update && sudo apt-get install -y cppcheck
+            
+    - name: static analysis
+      run: |
+           cppcheck --enable=all --error-exitcode=1 ./Devices/ECG/ 
+           cppcheck --enable=all --error-exitcode=1 ./Patient/

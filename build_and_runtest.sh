@@ -1,6 +1,6 @@
 # Build
 
-g++ -Wall -Werror -Wextra --coverage test/$1/*.cpp -o test_runner -lgtest -lgtest_main -pthread
+g++ -Wall -Werror -Wextra --coverage test/$1/*.cpp -o test_runner -lgtest -lgtest_main -pthread -lpaho-mqtt3as
 
 # Run
 
