@@ -1,19 +1,10 @@
 #include "Patient.hpp"
 
-    int id;
-    string name;
-    string gender;
-    int age;
-    string procedureName;
-    string consumables;
-    string reportIds;
-    int busy;
-
 Patient :: Patient()
-    :id(0), name(""), gender(""), age(0), procedureName(""), consumables(""), reportIds(""), busy(0) {}
+    :id(""), name(""), gender(""), age(0), procedureName(""), consumables(""), reportIds(""), busy(0) {}
 
 Patient::Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) 
-    : id(0),name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds(""),busy(0) {}
+    : id(""),name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds(""),busy(0) {}
 
 Patient& Patient::operator=(const Patient& p) {
     this->id = p.id;
@@ -27,7 +18,7 @@ Patient& Patient::operator=(const Patient& p) {
     return *this;
 }
 
-int Patient::getId(){
+string Patient::getId(){
     return id;
 }
 
@@ -66,7 +57,7 @@ int Patient :: getBusyStatus(){
     return busy;
 }
 
-void Patient :: setId(int newId){
+void Patient :: setId(const string& newId){
     id = newId;
 }
 
@@ -120,6 +111,6 @@ void Patient::setBusyStatus(int newStatus)
 }
 
 string Patient::toString() {
-    string result = to_string(id) + ";" + name + ";" + gender + ";" + to_string(age) + ";" + procedureName + ";" + consumables + ";" + reportIds + ";" + to_string(busy);
+    string result = id + ";" + name + ";" + gender + ";" + to_string(age) + ";" + procedureName + ";" + consumables + ";" + reportIds + ";" + to_string(busy);
     return result;
 }

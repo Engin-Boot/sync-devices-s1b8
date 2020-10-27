@@ -7,7 +7,7 @@ using namespace std;
 class Patient 
 {
 private:
-    int id; 
+    string id; 
     string name;
     string gender;
     int age;
@@ -21,7 +21,7 @@ public:
     Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName);
 
     Patient& operator=(const Patient& p);
-    int getId();
+    string getId();
     string getName();
     string getGender();
     int getAge();
@@ -29,7 +29,7 @@ public:
     string getConsumables();
     string getReportIds();
     int getBusyStatus();
-    void setId(int newId);
+    void setId(const string& newId);
     void setName(const string& newName);
     void setGender(const string& newGender);
     void setAge(int newAge);
