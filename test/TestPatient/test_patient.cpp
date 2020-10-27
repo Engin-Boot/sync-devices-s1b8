@@ -59,7 +59,7 @@ TEST(APITest, test_to_string_method)
     patient.setAge(20);
     patient.setGender("Male");
     patient.setProcedureName("Cardiac");
-    string expected_string = "0;ABC;Male;20;Cardiac;;;0";
+    string expected_string = ";ABC;Male;20;Cardiac;;;0";
     EXPECT_STREQ(expected_string.c_str(), patient.toString().c_str());
 }
 
