@@ -69,15 +69,19 @@ class Patient:
     def getBusyStatus(self):
         return self.busy
 
+    def __repr__(self):
+        return self.toString()
+
     def __eq__(self, other):
-        self.id = other.getId()
-        self.name = other.getName()
-        self.age = other.getAge()
-        self.gender = other.getGender()
-        self.procedureName = other.getProcedureName()
-        self.consumables = other.getConsumables()
-        self.reportIds = other.getReportIds()
-        self.busy = other.getBusyStatus()
+        return all(
+        [self.id == other.getId(),
+        self.name == other.getName(),
+        self.age == other.getAge(),
+        self.gender == other.getGender(),
+        self.procedureName == other.getProcedureName(),
+        self.consumables == other.getConsumables(),
+        self.reportIds == other.getReportIds(),
+        self.busy == other.getBusyStatus()])
 
     def toString(self):
         return str(self.id) + ";" + self.name + ";" + self.gender + ";" + str(self.age) + ";" + self.procedureName + ";" + self.consumables + ";" + self.reportIds + ";" + str(self.busy)
