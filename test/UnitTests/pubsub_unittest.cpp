@@ -1,7 +1,9 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include "../../Devices/ECG/pubsub.cpp"
-#include<unistd.h>
+#include <unistd.h>
+
+#define LATENCY 2
 #define TOPIC "MedicalDevice"
 #define CLIENT_ID "CT_CLIENT_1"
 #define BROKER_URL "tcp://localhost:1883"
@@ -18,6 +20,7 @@ int disconnected;
 MQTTAsync_createOptions create_opts;
 MQTTAsync_responseOptions pub_opts;
 MQTTAsync_disconnectOptions disc_opts;
+
 string payload;
 
 void InitGlobals()
@@ -36,22 +39,9 @@ void InitGlobals()
     disconnected = 0;
 }
 
-void WaitForConnection()
-{
-    while(!finished)
-    {
-        sleep(1);
-        if(subscribed) break;
-    }
-}
-
-void wait_for_publish()
-{
-    while(!published) sleep(1);
-}
-
 void handle_incoming_messages(void *context, char *topicName, int topicLen, MQTTAsync_message *message)
 {
+    payload = (char*)message->payload;
     MQTTAsync_freeMessage(&message);
     MQTTAsync_free(topicName);
 }
@@ -60,7 +50,7 @@ TEST(pubsub_unittest, test_connect_and_subscribe)
 {
     EXPECT_EQ(subscribed,0);
     myconnect(client);
-    WaitForConnection();
+    sleep(LATENCY);
     EXPECT_EQ(subscribed,1);
 }
 
@@ -69,8 +59,9 @@ TEST(pubsub_unittest, test_publish)
     string message = "Hello";
     EXPECT_EQ(published,0);
     publish(client, pub_opts, message );
-    wait_for_publish();
+    sleep(LATENCY);
     EXPECT_EQ(published,1);
+    EXPECT_EQ(payload, "Hello");
 }
 
 
