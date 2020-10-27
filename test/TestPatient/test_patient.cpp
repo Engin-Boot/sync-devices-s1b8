@@ -39,27 +39,31 @@ TEST(CreatePatientObject, create_custom_patient)
 TEST(APITest, test_getters_and_setters)
 {
     Patient patient;
-
+    patient.setId(3);
     patient.setName("ABC");
     patient.setAge(20);
     patient.setGender("Male");
     patient.setProcedureName("Cardiac");
+    patient.setBusyStatus(1);
 
     EXPECT_STREQ("ABC", patient.getName().c_str());
     EXPECT_STREQ("Male", patient.getGender().c_str());
     EXPECT_STREQ("Cardiac", patient.getProcedureName().c_str());
     EXPECT_EQ(20, patient.getAge());
+    EXPECT_EQ(3,patient.getId());
+    EXPECT_EQ(1,patient.getBusyStatus());
+
 }
 
 TEST(APITest, test_to_string_method)
 {
     Patient patient;
-
+    patient.setId(3);
     patient.setName("ABC");
     patient.setAge(20);
     patient.setGender("Male");
     patient.setProcedureName("Cardiac");
-    string expected_string = "ABC;Male;20;Cardiac;;";
+    string expected_string = "3;ABC;Male;20;Cardiac;;;0";
     EXPECT_STREQ(expected_string.c_str(), patient.toString().c_str());
 }
 

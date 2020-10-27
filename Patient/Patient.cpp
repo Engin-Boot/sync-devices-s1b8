@@ -1,26 +1,34 @@
 #include "Patient.hpp"
 
+    int id;
     string name;
     string gender;
     int age;
     string procedureName;
     string consumables;
     string reportIds;
+    int busy;
 
-Patient::Patient()
-    : name(""), gender(""), age(0), procedureName(""), consumables(""), reportIds("") {}
+Patient :: Patient()
+    :id(0), name(""), gender(""), age(0), procedureName(""), consumables(""), reportIds(""), busy(0) {}
 
 Patient::Patient(const string& Name, const string& Gender, int Age, const string& ProcedureName) 
-    : name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds("") {}
+    : id(0),name(Name), gender(Gender), age(Age), procedureName(ProcedureName), consumables(""), reportIds(""),busy(0) {}
 
 Patient& Patient::operator=(const Patient& p) {
+    this->id = p.id;
     this->name = p.name;
     this->gender = p.gender;
     this->age = p.age;
     this->procedureName = p.procedureName;
     this->consumables = p.consumables;
     this->reportIds = p.reportIds;
+    this->busy = p.busy;
     return *this;
+}
+
+int Patient::getId(){
+    return id;
 }
 
 string Patient::getName() {
@@ -54,6 +62,13 @@ string Patient::getReportIds() {
     return reportIds;
 }
 
+int Patient :: getBusyStatus(){
+    return busy;
+}
+
+void Patient :: setId(int newId){
+    id = newId;
+}
 
 void Patient::setName(const string& newName) {
     name = newName;
@@ -99,8 +114,12 @@ void Patient::setReportIds(const string& newReportIds)
     reportIds = newReportIds;
 }
 
+void Patient::setBusyStatus(int newStatus)
+{
+    busy = newStatus;
+}
 
 string Patient::toString() {
-    string result = name + ";" + gender + ";" + to_string(age) + ";" + procedureName + ";" + consumables + ";" + reportIds;
+    string result = to_string(id) + ";" + name + ";" + gender + ";" + to_string(age) + ";" + procedureName + ";" + consumables + ";" + reportIds + ";" + to_string(busy);
     return result;
 }
