@@ -3,7 +3,7 @@
 #include "pubsub.hpp"
 
 #define TOPIC "MedicalDevice"
-#define CLIENT_ID "CT_CLIENT_1"
+#define CLIENT_ID "ECG_CLIENT_1"
 #define BROKER_URL "tcp://localhost:1883"
 
 extern void set_client_id(char* id);
