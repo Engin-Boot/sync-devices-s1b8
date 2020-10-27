@@ -50,7 +50,7 @@ jobs:
             gcov -r test/UnitTests/*.cpp 
     
     - name: build IntegrationTest module
-      run:  g++ -Wall -Werror --coverage test/IntegrationTests/*.cpp -o testchecker -lgtest -lgtest_main -pthread -lpaho-mqtt3as
+      run:  g++ -Wall -Werror --coverage test/IntegrationTests/*.cpp Patient/*.cpp -o testchecker -lgtest -lgtest_main -pthread -lpaho-mqtt3as
 
     - name: run integration tests
       run: ./testchecker
