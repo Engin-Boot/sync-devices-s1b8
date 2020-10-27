@@ -25,4 +25,27 @@ jobs:
     - name: Patient Coverage report
       run: | 
             mv *.gc* test/TestPatient/
-            gcov -r test/TestPatient/*.cpp 
+            gcov -r test/TestPatient/*.cpp
+         
+    - name: get paho.mqtt.c client library
+      run: git clone https://github.com/eclipse/paho.mqtt.c.git
+
+
+    - name: build paho.mqtt.c client
+      run:  |
+            cd paho.mqtt.c
+            make -j
+            sudo make install
+
+
+    - name: build UnitTest module
+      run: - name: build Patient
+      run: g++ -Wall -Werror --coverage test/UnitTests/*.cpp -o testchecker -lgtest -lgtest_main -pthread -lpaho-mqtt3as
+
+    - name: run unit tests
+      run: ./testchecker
+
+    - name: Unit Tests Coverage report
+      run: | 
+            mv *.gc* test/UnitTests/
+            gcov -r test/UnitTests/*.cpp 
