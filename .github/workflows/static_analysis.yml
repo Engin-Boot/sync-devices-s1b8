@@ -17,5 +17,4 @@ jobs:
             
     - name: static analysis
       run: |
-           cppcheck --enable=all --error-exitcode=1 ./Devices/ECG/ 
-           cppcheck --enable=all --error-exitcode=1 ./Patient/
+           cppcheck --enable=all --error-exitcode=1 ./Devices/ECG/ ./Patient/ 
