@@ -1,5 +1,6 @@
 import settings
 
+
 class MenuCLI:
     @staticmethod
     def displayMainMenu():
@@ -10,7 +11,6 @@ class MenuCLI:
         print("5. View Patient Count")
         print("6. Exit")
 
-    
     @staticmethod
     def displayEditMenu():
         print("1. Edit Name")
@@ -18,6 +18,3 @@ class MenuCLI:
         print("3. Edit Gender")
         print("4. Edit Procedure Name")
         print("5. Edit All")
-
-
-

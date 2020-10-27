@@ -1,6 +1,6 @@
 import time
 import settings
-from MenuCLI import MenuCLI
+from menu_cli import MenuCLI
 from pubsub_util import PubSubUtil
 
 
@@ -9,8 +9,8 @@ def main_application(client):
         client.published = False
         MenuCLI.displayMainMenu()
         choice = settings.get_user_choice()
-        settings.functions_map[choice]()
-    
+        settings.main_menu_functions_map[choice]()
+
 
 if __name__ == '__main__':
 

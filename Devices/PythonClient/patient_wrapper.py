@@ -1,7 +1,8 @@
 import settings
 import time
 import random
-from MenuCLI import MenuCLI
+from menu_cli import MenuCLI
+
 
 class PatientWrapper:
     @staticmethod
@@ -10,11 +11,9 @@ class PatientWrapper:
         msg = settings.temporary_patient.toString()
         client.publish(settings.topic, msg)
 
-
     @staticmethod
     def isPatientBusy():
         return settings.original_patient.getBusyStatus()
-
 
     @staticmethod
     def isPatientDataAvailable():
@@ -23,64 +22,66 @@ class PatientWrapper:
     @staticmethod
     def setName(name):
         settings.temporary_patient.setName(name)
-    
+
     @staticmethod
     def setAge(age):
-        settings.temporary_patient.setAge(age)        
+        settings.temporary_patient.setAge(age)
 
     @staticmethod
     def setGender(gender):
         settings.temporary_patient.setGender(gender)
-    
+
     @staticmethod
     def setProcedureName(procedureName):
         settings.temporary_patient.setProcedureName(procedureName)
 
     @staticmethod
-    def EditName():
+    def editName():
         name = input("Enter corrected name: ")
         PatientWrapper.setName(name)
 
     @staticmethod
-    def EditAge():
+    def editAge():
         age = int(input("Enter corrected age: "))
         PatientWrapper.setAge(age)
 
     @staticmethod
-    def EditGender():
+    def editGender():
         gender = input("Enter corrected gender: ")
         PatientWrapper.setGender(gender)
 
     @staticmethod
-    def EditProcedureName():
+    def editProcedureName():
         procedureName = input("Enter procedure name: ")
         PatientWrapper.setProcedureName(procedureName)
 
     @staticmethod
-    def EditAll():
-        PatientWrapper.EditName()
-        PatientWrapper.EditAge()
-        PatientWrapper.EditGender()
-        PatientWrapper.EditProcedureName()
+    def editAll():
+        PatientWrapper.editName()
+        PatientWrapper.editAge()
+        PatientWrapper.editGender()
+        PatientWrapper.editProcedureName()
 
     @staticmethod
     def isPatientDataAvailableAndFree():
         if not PatientWrapper.isPatientDataAvailable():
-            print("No patient details entered.. Please try after entering the patient details!")
+            print(
+                "No patient details entered.. Please try after entering the patient details!")
             return False
-        
+
         if PatientWrapper.isPatientBusy():
-            print("Sorry! some procedure is already in progress with the current patient.. please try again in sometime..") 
+            print("Sorry! some procedure is already in progress with the current patient.. please try again in sometime..")
             return False
-        
+
         return True
-    
-    @staticmethod 
+
+    @staticmethod
     def procedure(repeat_count):
         count = 0
         while count < repeat_count:
             time.sleep(1)
-            strInput = input("Enter any consumable used till now: (if nothing, type none) ")
+            strInput = input(
+                "Enter any consumable used till now: (if nothing, type none) ")
             if strInput != "none":
                 settings.temporary_patient.addConsumables(strInput)
             count += 1
@@ -91,20 +92,19 @@ class PatientWrapper:
 
         if not PatientWrapper.isPatientDataAvailableAndFree:
             return
-        
+
         PatientWrapper.setAndPublishBusyStatus(client, 1)
 
-        PatientWrapper.procedure(repeat_count = 3)
+        PatientWrapper.procedure(repeat_count=3)
         reportId = "MRI " + str(random.randint(100, 3000))
         settings.temporary_patient.addReportIds(reportId)
 
-    
         settings.temporary_patient.setBusyStatus(0)
         msg = settings.temporary_patient.toString()
         client.publish(settings.topic, msg)
 
     @staticmethod
-    def set_patient_info(name, age, gender, procedure_name):
+    def setPatientInfo(name, age, gender, procedure_name):
         settings.temporary_patient.setId(settings.get_patient_count())
         settings.temporary_patient.setName(name)
         settings.temporary_patient.setAge(age)
@@ -112,30 +112,28 @@ class PatientWrapper:
         settings.temporary_patient.setProcedureName(procedure_name)
 
     @staticmethod
-    def get_patient_info():
+    def getPatientInfo():
         name = input("Enter patient name: ")
         age = int(input("Enter age: "))
         gender = input("Enter gender: ")
         procedure_name = input("Enter procedure name: ")
 
         return (name, age, gender, procedure_name)
-    
+
     @staticmethod
-    def get_serialized_patient_info():
+    def getSerializedPatientInfo():
         return settings.temporary_patient.toString()
-    
 
     @staticmethod
     def addNewPatient():
         client = settings.client
         settings.update_patient_count()
-        patient_info = PatientWrapper.get_patient_info()
-        PatientWrapper.set_patient_info(*patient_info)
-        msg = PatientWrapper.get_serialized_patient_info()
+        patient_info = PatientWrapper.getPatientInfo()
+        PatientWrapper.setPatientInfo(*patient_info)
+        msg = PatientWrapper.getSerializedPatientInfo()
         client.publish(settings.topic, msg)
         while not client.published:
             time.sleep(1)
-
 
     @staticmethod
     def editPatient():
@@ -146,16 +144,15 @@ class PatientWrapper:
         PatientWrapper.setAndPublishBusyStatus(client, 1)
 
         MenuCLI.displayEditMenu()
-        
+
         print("Enter your choice: ")
         choice = settings.get_user_choice()
 
-        settings.edit_functions_map[choice]()
+        settings.edit_menu_functions_map[choice]()
 
         settings.temporary_patient.setBusyStatus(0)
         msg = settings.temporary_patient.toString()
         client.publish(settings.topic, msg)
-
 
     @staticmethod
     def printPatientInformation():
@@ -165,7 +162,6 @@ class PatientWrapper:
         print("Procedure Name: ", settings.original_patient.getProcedureName())
         print("Consumables: ", settings.original_patient.getConsumables())
         print("Report IDs", settings.original_patient.getReportIds())
-
 
     @staticmethod
     def printPatientCount():
