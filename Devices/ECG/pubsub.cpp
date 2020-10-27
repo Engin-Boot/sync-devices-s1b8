@@ -134,7 +134,7 @@ int mypublish(MQTTAsync client, int datalen, std::string &data, MQTTAsync_respon
     return rc;
 }
 
-void publish(MQTTAsync &client, MQTTAsync_responseOptions &pub_opts, string &data)
+void publish(const MQTTAsync &client, MQTTAsync_responseOptions &pub_opts, string &data)
 {
     int rc = 0;
     rc = mypublish(client, data.length(), data, pub_opts);
