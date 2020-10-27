@@ -35,11 +35,6 @@ string generate_patient_id(const string& name)
 
 PatientInfo getPatientInfo()
 {
-	string name;
-	int age;
-	string gender;
-	string procedureName;
-
 	PatientInfo p_info;
 
 	cout << "Enter patient name: ";
@@ -75,9 +70,7 @@ void setPatientInfo(PatientInfo& p_info)
 
 void addNewPatient()
 {
-    string strInput;
     string verified = "no";
-	int intInput;
 	PatientInfo p_info;
 	do {
 		p_info = getPatientInfo();
