@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "../Patient/Patient.hpp"
+#include "../../Patient/Patient.hpp"
 #include "MenuCLI.hpp"
 
 #include <iostream>

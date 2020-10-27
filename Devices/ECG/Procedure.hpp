@@ -5,7 +5,7 @@
 
 #define PROCEDURE_RUN_TIME 3
 
-#include "../Patient/Patient.hpp"
+#include "../../Patient/Patient.hpp"
 
 using namespace std;
 
