@@ -265,3 +265,6 @@ build_tools_fortify.def
 
 # VS Code config
 .vscode
+
+# py cache
+__pycache__
