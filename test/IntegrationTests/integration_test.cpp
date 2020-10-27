@@ -10,7 +10,7 @@
 
 void connect_and_subscribe()
 {
-    const char *broker_url = (const char *)"tcp://localhost:1883";
+    const char *broker_url = (const char *)"tcp://mqtt.eclipse.org:1883";
     char* topic = (char*)"TEST_TOPIC";
     char* client_id = (char*)"ECG_CLIENT_TEST";
 

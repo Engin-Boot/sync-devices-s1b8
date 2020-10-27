@@ -6,7 +6,7 @@
 #define LATENCY 2
 #define TOPIC "MedicalDevice"
 #define CLIENT_ID "CT_CLIENT_1"
-#define BROKER_URL "tcp://localhost:1883"
+#define BROKER_URL "tcp://mqtt.eclipse.org:1883"
 
 using namespace std;
 
