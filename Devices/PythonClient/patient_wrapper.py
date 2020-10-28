@@ -57,8 +57,8 @@ class PatientWrapper:
         current_procedure_name = settings.original_patient.getProcedureName()
         new_procedure_name = settings.temporary_patient.getProcedureName()
         if current_procedure_name != new_procedure_name: 
-            settings.update_inventory()
-            settings.send_mail_if_stock_low(new_procedure_name)
+            settings.update_inventory(new_procedure_name)
+            settings.send_mail_if_stock_low()
 
     @staticmethod
     def editAll():
