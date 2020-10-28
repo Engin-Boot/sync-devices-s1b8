@@ -3,7 +3,7 @@ name: Static Analysis
 on:
   pull_request:
   push:
-    branches: [ master, sync-devices-s1b12 ]
+    branches: [ master, sync-devices-s1b12-testing ]
 
 jobs:
   build:

@@ -1,0 +1,22 @@
+name: Run Python Unit Tests
+
+on:
+  pull_request:
+  push:
+    branches: [ sync-devices-s1b12-testing ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+
+    - name: test patient
+      run: |
+           cd test/PythonUnitTests
+           python3 -m unittest tests.test_patient
+           
+           

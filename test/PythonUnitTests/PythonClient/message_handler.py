@@ -17,5 +17,4 @@ class MessageHandler:
             settings.update_patient_count()
             settings.update_inventory(settings.original_patient.getProcedureName().lower().strip())
             settings.send_mail_if_stock_low()
-            settings.temporary_patient = settings.original_patient
-        
+
