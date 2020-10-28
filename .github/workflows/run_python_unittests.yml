@@ -1,0 +1,24 @@
+name: Run Python Unit Tests
+
+on:
+  pull_request:
+  push:
+    branches: [ sync-devices-s1b12-testing ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: install coverage.py
+      run: pip3 install coverage
+    
+
+    - name: test patient
+      run: |
+           coverage run -m unittest test/PythonUnitTests/tests.test_patient
+           coverage report -m
+           
