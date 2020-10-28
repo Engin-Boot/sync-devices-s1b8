@@ -21,7 +21,7 @@
     - cd paho.mqtt.c
     - make -j
     - sudo make install
-    -pip3 install quick-mailer
+    - pip3 install quick-mailer
 
 ### Build
 
