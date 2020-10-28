@@ -13,9 +13,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: install coverage.py
+      run: pip install coverage
+    
+
     - name: test patient
       run: |
-           pip3 install coverage
-           coverage run -m unittest test/PythonUnitTests/tests.test_patient
-           coverage report -m
+           $HOME/.local/bin/coverage run -m unittest test/PythonUnitTests/tests.test_patient
+           $HOME/.local/bin/coverage report -m
            
