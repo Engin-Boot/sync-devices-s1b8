@@ -3,7 +3,7 @@ name: Run Python Unit Tests
 on:
   pull_request:
   push:
-    branches: [ sync-devices-s1b12-testing ]
+    branches: [ sync-devices-s1b12 ]
 
 jobs:
   build:
