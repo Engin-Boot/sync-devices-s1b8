@@ -1,6 +1,16 @@
 # Build
 
-g++ -Wall -Werror -Wextra --coverage test/$1/*.cpp -o test_runner -lgtest -lgtest_main -pthread -lpaho-mqtt3as
+if [ $1 == TestPatient ]; then
+    g++ -Wall -Werror --coverage test/$1/*.cpp -o test_runner -lgtest -lgtest_main -pthread
+fi
+
+if [ $1 == UnitTests ]; then
+    g++ -Wall -Werror --coverage test/$1/*.cpp -o test_runner -lgtest -lgtest_main -pthread -lpaho-mqtt3as
+fi
+
+if [ $1 == IntegrationTests ]; then
+    g++ -Wall -Werror --coverage test/$1/*.cpp Patient/*.cpp -o test_runner -lgtest -lgtest_main -pthread -lpaho-mqtt3as
+fi
 
 # Run
 
@@ -13,7 +23,7 @@ mv *.gc* test/$1/
 printf "\n**************** Coverage Report ***************\n\n"
 
 gcov -r test/$1/*.cpp 
-gcovr -r . --html -o index.html
+gcovr -r . --html -o $2.html
 
 # Clean
 
