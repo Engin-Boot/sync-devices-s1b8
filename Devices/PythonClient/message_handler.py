@@ -1,7 +1,17 @@
 import settings
+import copy
 
 
 class MessageHandler:
+    @staticmethod
+    def handle_edit():
+        condition = settings.temporary_patient.getId() != settings.original_patient.getId()        
+        if condition:
+            settings.update_patient_count()
+            settings.update_inventory(settings.original_patient.getProcedureName().lower().strip())
+            settings.send_mail_if_stock_low()
+            
+        
     @staticmethod
     def handle_message(message):
         contents = list(message.strip().split(";"))
@@ -13,9 +23,10 @@ class MessageHandler:
         settings.original_patient.setConsumables(contents[5])
         settings.original_patient.setReportIds(contents[6])
         settings.original_patient.setBusyStatus(int(contents[7]))
-        if settings.temporary_patient.getId() != settings.original_patient.getId():
-            settings.update_patient_count()
-            settings.update_inventory(settings.original_patient.getProcedureName().lower().strip())
-            settings.send_mail_if_stock_low()
-            settings.temporary_patient = settings.original_patient
+
+        MessageHandler.handle_edit()
+
+        settings.temporary_patient = copy.deepcopy(settings.original_patient)
+
+
         
