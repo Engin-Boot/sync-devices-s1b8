@@ -4,7 +4,7 @@ script_map main_menu_mapping;
 script_map edit_menu_mapping;
 
 void DisplayChoices() {
-	cout << "Select one of the following menu items!" << endl;
+	cout << "\nSelect one of the following menu items!" << endl;
 	cout << "1. Add new Patient" << endl;
 	cout << "2. Edit patient info" << endl;
 	cout << "3. Start Procedure" << endl;
@@ -15,7 +15,7 @@ void DisplayChoices() {
 
 void displayEditMenu()
 {
-    cout << "1. Edit Name" << endl;
+    cout << "\n1. Edit Name" << endl;
     cout << "2. Edit Age" << endl;
     cout << "3. Edit Gender" << endl;
     cout << "4. Edit Procedure" << endl;

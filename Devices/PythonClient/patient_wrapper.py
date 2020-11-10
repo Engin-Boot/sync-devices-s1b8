@@ -124,9 +124,9 @@ class PatientWrapper:
     @staticmethod
     def getPatientInfo():
         name = input("Enter patient name: ")
-        age = int(input("Enter age: "))
-        gender = input("Enter gender: ")
-        procedure_name = input("Enter procedure name: ")
+        gender = input("Enter patient gender (Male/Female): ")
+        age = int(input("Enter patient age: "))
+        procedure_name = input("Enter Procedure name: ")
         settings.update_inventory(procedure_name)
         settings.send_mail_if_stock_low()
         return (name, age, gender, procedure_name)
@@ -169,14 +169,14 @@ class PatientWrapper:
 
     @staticmethod
     def printPatientInformation():
-        print("                      Patient Information                 ")
-        print()
+        print(" Patient Information ".center(100, "*"))
         print("Name: ", settings.original_patient.getName())
         print("Age: ", settings.original_patient.getAge())
         print("Gender:", settings.original_patient.getGender())
         print("Procedure Name: ", settings.original_patient.getProcedureName())
         print("Consumables: ", settings.original_patient.getConsumables())
         print("Report IDs: ", settings.original_patient.getReportIds())
+        print("*"*100)
 
     @staticmethod
     def printPatientCount():

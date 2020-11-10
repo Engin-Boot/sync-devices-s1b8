@@ -4,6 +4,7 @@ import settings
 class MenuCLI:
     @staticmethod
     def displayMainMenu():
+        print()
         print("1. Add Patient")
         print("2. Edit Patient")
         print("3. Start Procedure")

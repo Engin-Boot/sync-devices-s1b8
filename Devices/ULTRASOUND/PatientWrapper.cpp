@@ -36,7 +36,7 @@ string generate_patient_id(const string& name)
 PatientInfo getPatientInfo()
 {
 	PatientInfo p_info;
-
+	cout << endl;
 	cout << "Enter patient name: ";
 	cin >> p_info.name;
 	
@@ -48,7 +48,7 @@ PatientInfo getPatientInfo()
 
 	cout << "Enter Procedure name: ";
 	cin >> p_info.procedureName;
-	
+	cout << endl;
 	return p_info;
 }
 
@@ -190,10 +190,12 @@ void editPatientInfo()
 
 void printPatientInformation()
 {
+	cout << "******************************************* Patient Information *******************************************" << endl;
     cout << "Patient Name: " << original_patient.getName() << endl;
 	cout << "Patent Gender: " << original_patient.getGender() << endl;
 	cout << "Patient Age: " << original_patient.getAge() << endl;
 	cout << "Procedure Name: " << original_patient.getProcedureName() << endl;
 	cout << "Consumables: " << original_patient.getConsumables() << endl;
 	cout << "ReportIds: " << original_patient.getReportIds() << endl;
+	cout << "***********************************************************************************************************" << endl;
 }

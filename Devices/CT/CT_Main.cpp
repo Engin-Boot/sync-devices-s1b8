@@ -22,7 +22,7 @@ void MainMenu()
 void MainApplication()
 {
     char choice;
-    cout << "Warm greetings! Welcome to Philips CT_v1 system.. " << endl;
+    cout << "\nWarm greetings! Welcome to Philips CT_v1 system.. " << endl;
     cout << "Enter 'm' for Menu Page and 'q' to exit the application: ";
     cin >> choice;
     if(choice == 'm')
